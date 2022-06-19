@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    form(action="/search", method="post")
+        fieldset
+            legend Search for an item in FSS
+            input(name="query", type="text", value=query, style="width: 100%")
+            br
+            input(name="type", type="radio", value="storage", checked)
+            lable Minecraft items and blocks
+            input(name="type", type="radio", value="coord")
+            lable Coordinate
+            input(name="type", type="radio", value="library")
+            lable Books
+            button(type="submit" style="float: right") Search
