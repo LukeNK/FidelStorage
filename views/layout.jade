@@ -5,13 +5,15 @@ html
         link(rel='stylesheet', href='/stylesheets/style.css')
     body
         nav
-            a(href="/") HOME
-            a(href="/search") SEARCH
-            a(href="/search", style="float: right") SIGN IN
-
+            a(href="/") Home
+            a(href="/search") Search
+            a(href="https://docs.google.com/spreadsheets/d/15WQCAL0x39rmFDKfMoDNNalhahPVeGpYipkhvoXs7eg/edit?usp=sharing", target="_blank") Coordinate database
+            a(href="/guide") Guide
+            //- a(href="/search", style="float: right") Sign in
         block content
         script(src="/javascripts/scripts.js")
         footer
             p Contact Luke Transport at
-            li Tundra Storage: Put coords here
-            li Discord:
+            ul
+                li Tundra Storage: Put coords here
+                li Discord:

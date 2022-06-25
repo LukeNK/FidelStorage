@@ -1,15 +1,18 @@
 extends layout
-
 block content
     form(action="/search", method="post")
         fieldset
             legend Search for an item in FSS
             input(name="query", type="text", value=query, style="width: 100%")
             br
-            input(name="type", type="radio", value="storage", checked)
-            lable Minecraft items and blocks
-            input(name="type", type="radio", value="coord")
-            lable Coordinate
-            input(name="type", type="radio", value="library")
+            //- input(name="type", type="radio", value="storage", checked)
+            //- lable Minecraft items and blocks
+            //- input(name="type", type="radio", value="coord")
+            //- lable Coordinate
+            input(name="type", type="radio", value="library", checked)
             lable Books
             button(type="submit" style="float: right") Search
+    p Please noted that you have to search for the exact phrase. I am really really sorry about that.
+    if (ans)
+        each item in ans
+            a(href="/item/"+database+"?id="+item.id)= item.name

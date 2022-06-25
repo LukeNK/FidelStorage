@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Book name",
+        "author": "Author name",
+        "UDC": "UDC code of the book",
+        "date": "pulish date in UNIX timestamp",
+        "desc": "Description of the book",
+        "copies": [
+            "Location name of the place of the thing",
+            "Or online links",
+            "Or ID in the coord database",
+            "If multiple book at one location, just write it twice I guess?"
+        ]
+    }
+]

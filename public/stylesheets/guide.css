@@ -1,0 +1,23 @@
+.collapsible {
+    background-color: var(--color-section);
+    color: var(--color-fg);
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: var(--color-highlight);
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: var(--color-section);
+}

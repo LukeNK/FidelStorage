@@ -1,0 +1,8 @@
+extends layout
+block content
+    h1= item.name
+    p= item.author
+    p= item.desc
+    ul
+        each copy in item.copies
+            li= copy
