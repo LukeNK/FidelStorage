@@ -3,10 +3,12 @@ var router = express.Router();
 const createError = require('http-errors');
 
 const editJsonFile = require("edit-json-file");
-// databases
-let db = {
-    storage: editJsonFile('./database/storage.json'),
-    library: editJsonFile('./database/library.json'),
+// databases, need to fix this reference so it can adapt to changes
+function getDatabase() {
+    return {
+        storage: editJsonFile('./database/storage.json'),
+        library: editJsonFile('./database/library.json'),
+    }
 }
 
 // Default render
@@ -28,9 +30,10 @@ router.get('/search', function(req, res, next) {
 });
 router.post('/search', function(req, res, next) {
     let query = req.body.query.toLowerCase(), type = req.body.type, items = [];
-    if (!type || !db[type]) return next(createError(404)); // To error handle
-    for (const key in db[type].get()) {
-        let item = db[type].get()[key];
+    let db = getDatabase()[type];
+    if (!type || !db) return next(createError(404)); // To error handle
+    for (const key in db.get()) {
+        let item = db.get()[key];
         if ((key.toString() != query)
             && (item.name.toLowerCase() != query)) continue;
         items.push({...item, id:key}); // Push with ID
@@ -45,11 +48,11 @@ router.post('/search', function(req, res, next) {
 });
 
 router.get('/item/:database', function(req, res, next) {
-    let database = req.params.database, id = req.query.id;
-    if (!db[database]) return next(createError(404));
+    let db = getDatabase()[req.params.database], id = req.query.id;
+    if (!db) return next(createError(404));
     res.render('item', {
         ...renderVar,
-        item: db[database].get()[id]
+        item: db.get()[id]
     })
 })
 

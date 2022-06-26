@@ -4,6 +4,7 @@ block content
         .item {
             border: 1px solid var(--color-theme);
             padding: 0.5rem;
+            cursor: pointer;
         }
         .item:hover {
             background-color: var(--color-section)
@@ -15,12 +16,16 @@ block content
         .item .row {
             display: flex;
         }
-        .item h3{
-            flex: 80%
+        .item h2{
+            flex: 80%;
+            color: var(--color-theme)
         }
         .item code {
             flex: 20%
             color: var(--color-highlight);
+        }
+        .author {
+            color: var(--color-highlight)
         }
     form(action="/search", method="post")
         fieldset
@@ -37,9 +42,9 @@ block content
     p Please noted that you have to search for the exact phrase. I am really really sorry about that.
     if (ans)
         each item in ans
-            div(class="item")
+            div(class="item", onclick="location.href='/item/"+database+"?id="+item.id+"'")
                 div(class="row")
-                    h3
-                        a(href="/item/"+database+"?id="+item.id)= item.name
-                    code= item.UDC
+                    h2= item.name
+                    code= item.id
+                p(class="author")= item.author
                 p= item.desc

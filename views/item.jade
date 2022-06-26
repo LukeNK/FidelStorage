@@ -1,8 +1,29 @@
 extends layout
 block content
+    style.
+        h1, h2, h3 {
+            color: var(--color-theme);
+            margin-bottom: 0;
+        }
+        #author {
+            margin: 0;
+            /* margin-left: 2rem; */
+            color: var(--color-highlight)
+        }
+        .property {
+            color: var(--color-theme)
+        }
     h1= item.name
-    p= item.author
+    p(id="author")
+        i= item.author
     p= item.desc
+    p
+        b(class="property") Publish date:
+        span= ' ' + new Date(item.date * 1000).toDateString()
+    p
+        b(class="property") Universal Decimal Classification:
+        code= ' ' + item.UDC
+    h2 Location of copies
     ul
         each copy in item.copies
             li= copy
