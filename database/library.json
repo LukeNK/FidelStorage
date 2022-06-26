@@ -4,7 +4,7 @@
         "author": "Author name",
         "UDC": "UDC code of the book",
         "date": "pulish date in UNIX timestamp",
-        "desc": "Description of the book",
+        "desc": "Description of the book. This is the test book for the system.",
         "copies": [
             "Location name of the place of the thing",
             "Or online links",
