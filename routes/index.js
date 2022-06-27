@@ -39,8 +39,8 @@ router.post('/search', function(req, res, next) {
             && (iName.toLowerCase() != query)
             && (!iName.split(' ').includes(query))
             && (!iName.split('_').includes(query))
-            && (item?.displayName.toLowerCase() != query)
-            && (!item?.displayName.toLowerCase().split(' ').includes(query))
+            && (item?.displayName?.toLowerCase() != query)
+            && (!item?.displayName?.toLowerCase()?.split(' ')?.includes(query))
             && (item?.id != query)) continue;
         items.push({...item, id:key}); // Push with ID
     }
@@ -49,7 +49,7 @@ router.post('/search', function(req, res, next) {
         title: 'Search FSS',
         query: (query || 'Minecraft item, coordinate, or book'),
         database: type,
-        ans: items,
+        ans: items.length? items : null,
     });
 });
 

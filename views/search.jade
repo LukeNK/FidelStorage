@@ -35,18 +35,18 @@ block content
             button(type="submit" style="float: right") Search
     p Please noted that you have to search for the exact phrase. I am really really sorry about that.
     if (database == 'storage')
-        p Please noted that this search is using 1.19 item list.
+        p Please noted that this search is using 1.19 item list. However, the image list is based on 1.17 Minecraft.
     if (ans)
         each item in ans
             div(class="item", onclick="location.href='/item/"+database+"?id="+item.id+"'")
-                div(class="row")
-                    div(style="flex: 80%")
-                        h2= item.name
-                        code(style="text-align: right;")= item.id
-                    div(style="flex: 20%")
-                        p(class="author")
-                            i= item.author
                 if (database == 'library')
+                    div(class="row")
+                        div(style="flex: 80%")
+                            h2= item.name
+                            //- code(style="text-align: right;")= item.id
+                        div(style="flex: 20%")
+                            p(class="author")
+                                i= item.author
                     div(class="row")
                         div(style="flex: 20%")
                             img(src=item.cover, alt="Book cover", style="width: 100%")
@@ -54,4 +54,11 @@ block content
                             p= item.desc
 
                 if (database == 'storage')
-                    p(class="author")= item.displayName
+                    div(class="row")
+                        div(style="flex: 20%")
+                            img(src='/images/MinecraftIcon/'+item.name+'.png', alt=item.displayName)
+                        div(style="flex:80%")
+                            h2(style="flex: 80%;")= item.displayName
+                            code= item.name
+    else
+        h1 Sorry there are no result TT
