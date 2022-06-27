@@ -3,6 +3,8 @@ block content
     style.
         .item {
             border: 1px solid var(--color-theme);
+            float: left;
+            width: 50%;
             padding: 0.5rem;
             cursor: pointer;
         }
@@ -16,14 +18,6 @@ block content
         .item .row {
             display: flex;
         }
-        .item h2{
-            flex: 80%;
-            color: var(--color-theme)
-        }
-        .item code {
-            flex: 20%
-            color: var(--color-highlight);
-        }
         .author {
             color: var(--color-highlight)
         }
@@ -32,19 +26,32 @@ block content
             legend Search for an item in FSS
             input(name="query", type="text", value=query, style="width: 100%")
             br
-            //- input(name="type", type="radio", value="storage", checked)
-            //- lable Minecraft items and blocks
+            input(name="type", type="radio", value="storage", required)
+            lable Minecraft items and blocks
             //- input(name="type", type="radio", value="coord")
             //- lable Coordinate
-            input(name="type", type="radio", value="library", checked)
+            input(name="type", type="radio", value="library")
             lable Books
             button(type="submit" style="float: right") Search
     p Please noted that you have to search for the exact phrase. I am really really sorry about that.
+    if (database == 'storage')
+        p Please noted that this search is using 1.19 item list.
     if (ans)
         each item in ans
             div(class="item", onclick="location.href='/item/"+database+"?id="+item.id+"'")
                 div(class="row")
-                    h2= item.name
-                    code= item.id
-                p(class="author")= item.author
-                p= item.desc
+                    div(style="flex: 80%")
+                        h2= item.name
+                        code(style="text-align: right;")= item.id
+                    div(style="flex: 20%")
+                        p(class="author")
+                            i= item.author
+                if (database == 'library')
+                    div(class="row")
+                        div(style="flex: 20%")
+                            img(src=item.cover, alt="Book cover", style="width: 100%")
+                        div(style="flex: 80%")
+                            p= item.desc
+
+                if (database == 'storage')
+                    p(class="author")= item.displayName

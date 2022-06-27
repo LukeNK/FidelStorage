@@ -5,6 +5,12 @@ block content
             color: var(--color-theme);
             margin-bottom: 0;
         }
+        .row {
+            display: flex;
+        }
+        .row img {
+            width: 100%
+        }
         #author {
             margin: 0;
             /* margin-left: 2rem; */
@@ -13,17 +19,46 @@ block content
         .property {
             color: var(--color-theme)
         }
-    h1= item.name
-    p(id="author")
-        i= item.author
-    p= item.desc
-    p
-        b(class="property") Publish date:
-        span= ' ' + new Date(item.date * 1000).toDateString()
-    p
-        b(class="property") Universal Decimal Classification:
-        code= ' ' + item.UDC
-    h2 Location of copies
-    ul
-        each copy in item.copies
-            li= copy
+    div(class="row")
+        if (database == 'library')
+            if (item.cover)
+                div(style="flex: 30%")
+                    img(src=item.cover, alt="Book cover", loading="lazy")
+            div(class="properties", style="flex: 70%")
+                h1(style="margin-top: 0;")= item.name
+                p(id="author")
+                    i= item.author
+                p= item.desc
+                p
+                    b(class="property") Publish date:
+                    span= ' ' + new Date(item.date * 1000).toDateString()
+                p
+                    b(class="property") Universal Decimal Classification:
+                    code= ' ' + item.UDC
+                p
+                    b(class="property") Location of copies:
+                ul
+                    each copy in item.copies
+                        li= copy
+                p
+                    b(class="property") Notes:
+                    span= ' ' + item.note
+
+        if (database == 'storage')
+            div(class="properties")
+                h1(style="margin-top: 0;")= item.displayName
+                p(id="author")
+                    i= item.name
+                if (item.maxDurability)
+                    p
+                        b(class="property") Max durability
+                        span= ' ' + item.maxDurability
+                p
+                    b(class="property") Stack size:
+                    span= ' ' + item.stackSize
+                if (item.enchantCategories)
+                    p
+                        b(class="property") Enchant categories:
+                    ul
+                        each enchant in item.enchantCategories
+                            li= enchant

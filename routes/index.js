@@ -34,8 +34,14 @@ router.post('/search', function(req, res, next) {
     if (!type || !db) return next(createError(404)); // To error handle
     for (const key in db.get()) {
         let item = db.get()[key];
+        let iName = item.name.toLowerCase();
         if ((key.toString() != query)
-            && (item.name.toLowerCase() != query)) continue;
+            && (iName.toLowerCase() != query)
+            && (!iName.split(' ').includes(query))
+            && (!iName.split('_').includes(query))
+            && (item?.displayName.toLowerCase() != query)
+            && (!item?.displayName.toLowerCase().split(' ').includes(query))
+            && (item?.id != query)) continue;
         items.push({...item, id:key}); // Push with ID
     }
     res.render('search', {
@@ -48,12 +54,14 @@ router.post('/search', function(req, res, next) {
 });
 
 router.get('/item/:database', function(req, res, next) {
-    let db = getDatabase()[req.params.database], id = req.query.id;
+    let type = req.params.database;
+    let db = getDatabase()[type], id = req.query.id;
     if (!db) return next(createError(404));
     res.render('item', {
         ...renderVar,
-        item: db.get()[id]
-    })
+        item: db.get()[id],
+        database: type
+    });
 })
 
 module.exports = router;

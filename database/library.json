@@ -4,12 +4,14 @@
         "author": "Author name",
         "UDC": "UDC code of the book",
         "date": "pulish date in UNIX timestamp",
-        "desc": "Description of the book. This is the test book for the system.",
+        "desc": "Description of the book. This is the test book for the system. Please don't question the cover image.",
+        "cover": "https://cdn.discordapp.com/attachments/810537027186589726/970469485486149683/2022-01-31_09.16.46.png",
         "copies": [
             "Location name of the place of the thing",
             "Or online links",
             "Or ID in the coord database",
             "If multiple book at one location, just write it twice I guess?"
-        ]
+        ],
+        "note": "Notes by the librarians about up-keep, etc... Don't write your passwords here"
     }
 ]
