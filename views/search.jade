@@ -26,12 +26,12 @@ block content
             legend Search for an item in FSS
             input(name="query", type="text", value=query, style="width: 100%")
             br
-            input(name="type", type="radio", value="storage", required)
             lable Minecraft items and blocks
-            //- input(name="type", type="radio", value="coord")
+                input(name="type", type="radio", value="storage", required)
             //- lable Coordinate
-            input(name="type", type="radio", value="library")
+                //- input(name="type", type="radio", value="coord")
             lable Books
+                input(name="type", type="radio", value="library")
             button(type="submit" style="float: right") Search
     p Please noted that you have to search for the exact phrase. I am really really sorry about that.
     if (database == 'storage')
@@ -41,17 +41,12 @@ block content
             div(class="item", onclick="location.href='/item/"+database+"?id="+item.id+"'")
                 if (database == 'library')
                     div(class="row")
-                        div(style="flex: 80%")
-                            h2= item.name
-                            //- code(style="text-align: right;")= item.id
-                        div(style="flex: 20%")
-                            p(class="author")
-                                i= item.author
-                    div(class="row")
                         div(style="flex: 20%")
                             img(src=item.cover, alt="Book cover", style="width: 100%")
                         div(style="flex: 80%")
-                            p= item.desc
+                            h2= item.name
+                            p(class="author")
+                                i= item.author
 
                 if (database == 'storage')
                     div(class="row")
@@ -60,5 +55,5 @@ block content
                         div(style="flex:80%")
                             h2(style="flex: 80%;")= item.displayName
                             code= item.name
-    else
-        h1 Sorry there are no result TT
+    if (database && !ans)
+        h1 Sorry there is no result TT

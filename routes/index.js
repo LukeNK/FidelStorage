@@ -1,9 +1,9 @@
+// handle read operations
 var express = require('express');
 var router = express.Router();
 const createError = require('http-errors');
 
 const editJsonFile = require("edit-json-file");
-// databases, need to fix this reference so it can adapt to changes
 function getDatabase() {
     return {
         storage: editJsonFile('./database/storage.json'),
@@ -26,7 +26,7 @@ router.get('/guide', function (req, res, next) {
 })
 
 router.get('/search', function(req, res, next) {
-    res.render('search', {...renderVar, title: 'Search FSS', query: 'Minecraft item, coordinate, or book'})
+    res.render('search', {...renderVar, title: 'Search FSS', query: 'Name or ID'})
 });
 router.post('/search', function(req, res, next) {
     let query = req.body.query.toLowerCase(), type = req.body.type, items = [];
@@ -47,7 +47,7 @@ router.post('/search', function(req, res, next) {
     res.render('search', {
         ...renderVar,
         title: 'Search FSS',
-        query: (query || 'Minecraft item, coordinate, or book'),
+        query: (query || 'Name or ID'),
         database: type,
         ans: items.length? items : null,
     });

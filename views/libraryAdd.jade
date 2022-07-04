@@ -1,0 +1,19 @@
+extends layout
+block content
+    style.
+        input, textarea  {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+    form(action="./add", method="post")
+        fieldset
+            legend Add items to the library database
+            each property, key in template
+                lable(for= key)= key
+                    if (property == 'string')
+                        input(id= key, type="text", value= description[key])
+                    if (property == 'object')
+                        textarea(id= key, cols="30", rows="10")= description[key].join('\n')
+                br
+            p(class="warning") There is no possible way to edit or delete an item except direct manipulation. This feature is intentional so people wouldn't try to remove stuff without being exposed.
+            button(type="submit") Upload book

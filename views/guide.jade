@@ -1,6 +1,29 @@
 extends layout
 block content
-    link(rel="stylesheet", href="/stylesheets/guide.css")
+    style.
+        .collapsible {
+            background-color: var(--color-section);
+            color: var(--color-fg);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: var(--color-highlight);
+        }
+
+        /* Style the collapsible content. Note: hidden by default */
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: var(--color-section);
+        }
     button(class="collapsible") Storage building guide
     div(class="content")
         p A storage should include the following basic utilities:
@@ -11,3 +34,19 @@ block content
             li <b>Storage system:</b> The storage should follow the standard sorting system, including the collumn-row arrangement and sign posting.
             li <b>Green farm:</b> a farm, either semi-automatic or manual, to produce staple food. Manual tree farm is also highly recommended.
         p The design of the storage system should be incoporate with green design and reduce building footprint. Light provide by natural sunlight is also encouraged, so underground storage is not recommend. However, the designer should take the sorting system into consideration to avoid any possible conflict with future expansion.
+    button(class="collapsible") Dewey Decimal Classification basic guide
+    div(class="content")
+        p
+            i This is just a very basic guide for this system. If you want to research more, please find the actual book to read about it.
+        p I would not say much about the system itself because <a href="http://">Wikipedia</a> have all of the major information. This is the guide to determine what call number will be assigned to the book you have on your hand.
+    script.
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") content.style.display = "none";
+                else content.style.display = "block";
+            });
+        }
